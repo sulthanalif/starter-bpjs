@@ -20,11 +20,20 @@ class DatabaseSeeder extends Seeder
 
         $permissions = [
             'dashboard',
+            'master-data',
             'manage-users',
+            'user-create',
+            'user-update',
+            'user-delete',
             'settings',
             'manage-permissions',
+            'permission-create',
+            'permission-update',
+            'permission-delete',
             'manage-roles',
-            'manage-logs',
+            'role-create',
+            'role-update',
+            'role-delete',
         ];
 
         foreach ($permissions as $permission) {

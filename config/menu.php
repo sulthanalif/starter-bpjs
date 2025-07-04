@@ -1,46 +1,44 @@
 <?php
-
+// config/menu.php
 return [
-    'sidebar' => [
-        [
-            'text' => 'Dashboard',
-            'icon' => 'bi bi-speedometer',
-            'route' => 'dashboard', // Contoh rute yang aktif
-        ],
-        [
-            'header' => 'Master Data',
-        ],
-        [
-            'text' => 'Auth',
-            'icon' => 'bi bi-box-arrow-in-right',
-            'active_routes' => ['auth.*'],
-            'submenu' => [
-                [
-                    'text' => 'User',
-                    'route' => 'users',
-                    'url' => '#',
-                ],
-                [
-                    'text' => 'Version 2',
-                    'submenu' => [
-                        [
-                            'text' => 'Login',
-                            'route' => 'auth.v2.login',
-                            'url' => asset('dist') . '/examples/login-v2.html',
-                        ],
-                        [
-                            'text' => 'Register',
-                            'route' => 'auth.v2.register',
-                            'url' => asset('dist') . '/examples/register-v2.html',
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Lockscreen',
-                    'route' => 'auth.lockscreen',
-                    'url' => asset('dist') . '/examples/lockscreen.html',
-                ],
+    [
+        'label' => 'Dashboard',
+        'icon' => 'fas fa-tachometer-alt',
+        'route' => 'dashboard',
+        'permission' => 'dashboard',
+        'active_patterns' => 'admin/dashboard*', // String tunggal
+    ],
+    [
+        'label' => 'Master Data',
+        'icon' => 'fas fa-database',
+        'route' => 'master.index',
+        'permission' => 'master-data',
+        'active_patterns' => ['admin/users*', 'admin/role-permission*'],
+        'children' => [
+            [
+                'label' => 'Users',
+                'icon' => 'fas fa-users',
+                'route' => 'users',
+                'permission' => 'manage-users',
+                'active_patterns' => 'admin/users*',
             ],
-        ],
-    ]
+            [
+                'label' => 'Role & Permission',
+                'icon' => 'fas fa-user-tag',
+                'route' => 'role-permission.index',
+                'permission' => 'manage-roles',
+                'active_patterns' => 'admin/role-permission*',
+            ],
+        ]
+    ],
+    [
+        'label' => 'Log Viewer',
+        'icon' => 'fas fa-flag',
+        'url' => '/log-viewer', // Menggunakan 'url' bukan 'route'
+        'permission' => 'log-viewer',
+        'target' => '_blank', // Akan membuka di tab baru
+        'active_patterns' => 'log-viewer*', // Cocokkan URL path
+    ],
+
+    // tambahkan item lain sesuai kebutuhan…
 ];
